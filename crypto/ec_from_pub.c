@@ -14,8 +14,12 @@ EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN])
 	group = EC_KEY_get0_group(key);
 	point = EC_POINT_new(group);
 
-	EC_POINT_oct2point(group, point, (const unsigned char *) pub, EC_PUB_LEN, ctx);
+	EC_POINT_oct2point(group, point,
+			(const unsigned char *) pub, EC_PUB_LEN, ctx);
 	EC_KEY_set_public_key(key, (const EC_POINT *) point);
+
+	BN_CTX_free(ctx);
+	EC_POINT_free(point);
 
 	return (key);
 }
