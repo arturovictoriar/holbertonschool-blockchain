@@ -57,7 +57,7 @@ blockchain_t *blockchain_create(void)
 	memcpy(new_block->data.buffer, GENESIS_BUFFER, GENESIS_LEN);
 	memcpy(new_block->hash, GENESIS_HASH, SHA256_DIGEST_LENGTH);
 	/*Add the new block into the chain of blocks*/
-	if (llist_add_node(chain, new_block, ADD_NODE_FRONT))
+	if (llist_add_node(chain, new_block, ADD_NODE_FRONT) != 0)
 	{
 		free_block_chain(new_block, new_block_chain, chain);
 		return (NULL);
