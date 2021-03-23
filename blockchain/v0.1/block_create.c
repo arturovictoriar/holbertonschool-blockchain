@@ -32,7 +32,6 @@ block_t *block_create(block_t const *prev,
 	new_block->data.len = SET_MAX_LEN(data_len, BLOCKCHAIN_DATA_MAX);
 
 	memcpy(new_block->data.buffer, data, new_block->data.len);
-	memcpy(new_block->hash, "\0", SHA256_DIGEST_LENGTH);
 
 	return (new_block);
 }
