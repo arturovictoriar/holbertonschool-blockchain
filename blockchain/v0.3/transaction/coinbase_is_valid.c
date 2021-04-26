@@ -43,8 +43,8 @@ int coinbase_is_valid(transaction_t const *coinbase, uint32_t block_index)
 	{
 		return (0);
 	}
-	if (is_empty(txi->block_hash, sizeof(txi->block_hash)) == 0||
-		is_empty(txi->tx_id, sizeof(txi->tx_id)) == 0||
+	if (is_empty(txi->block_hash, sizeof(txi->block_hash)) == 0 ||
+		is_empty(txi->tx_id, sizeof(txi->tx_id)) == 0 ||
 		is_empty((uint8_t *)&txi->sig, sizeof(txi->sig)) == 0)
 	{
 		return (0);
