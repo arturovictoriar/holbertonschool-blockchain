@@ -16,9 +16,11 @@ blockchain_t *blockchain_create(void)
 	llist_t *list = llist_create(MT_SUPPORT_TRUE);
 	llist_t *unspent = llist_create(MT_SUPPORT_TRUE);
 
-	if (!chain || !block || !list || !unspent)
+	if (chain == NULL || block == NULL || list ==  NULL || unspent == NULL)
 	{
-		free(chain), free(block), llist_destroy(list, 1, NULL);
+		free(chain);
+		free(block);
+		llist_destroy(list, 1, NULL);
 		llist_destroy(unspent, 1, NULL);
 		return (NULL);
 	}
@@ -30,7 +32,9 @@ blockchain_t *blockchain_create(void)
 
 	if (llist_add_node(list, block, ADD_NODE_FRONT))
 	{
-		free(chain), free(block), llist_destroy(list, 1, NULL);
+		free(chain);
+		free(block);
+		llist_destroy(list, 1, NULL);
 		return (NULL);
 	}
 	chain->chain = list;
