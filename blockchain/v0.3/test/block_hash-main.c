@@ -23,8 +23,8 @@ int main(void)
 
 	block = block_create(block, (int8_t *)"Holberton", 9);
 	llist_add_node(block->transactions,
-		coinbase_create(owner, block->info.index),
-		ADD_NODE_REAR);
+			coinbase_create(owner, block->info.index),
+			ADD_NODE_REAR);
 	llist_add_node(blockchain->chain, block, ADD_NODE_REAR);
 	_blockchain_print_brief(blockchain);
 
