@@ -13,7 +13,7 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 	block_t *block = NULL;
 	llist_t *transactions = NULL;
 
-	block = calloc(1, sizeof(block));
+	block = calloc(1, sizeof(*block));
 	transactions = llist_create(MT_SUPPORT_FALSE);
 	if (block == NULL || transactions == NULL)
 	{
