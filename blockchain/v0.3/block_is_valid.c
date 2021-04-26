@@ -12,12 +12,14 @@ int validate_tx(llist_node_t node, unsigned int idx, void *arg)
 	transaction_t *tx = node;
 	validation_vistor_t *visitor = arg;
 
-	if (!idx)
+	if (idx == 0)
 	{
 		if (!coinbase_is_valid(tx, visitor->block_index))
+		{
 			visitor->valid = 0;
+		}
 	}
-	else if (!transaction_is_valid(tx, visitor->all_unspent))
+	else if (transaction_is_valid(tx, visitor->all_unspent) == 0)
 	{
 		dprintf(2, "validate_tx: invalid idx %u\n", idx);
 		visitor->valid = 0;
@@ -39,18 +41,18 @@ int block_is_valid(block_t const *block, block_t const *prev_block,
 	block_t const _genesis = GENESIS_BLOCK;
 	validation_vistor_t visitor = {0};
 
-	if (!block || (!prev_block && block->info.index != 0))
+	if (block == NULL || (prev_block == NULL && block->info.index != 0))
 		return (1);
 	if (block->info.index == 0)
 		return (memcmp(block, &_genesis, sizeof(_genesis)));
 	if (block->info.index != prev_block->info.index + 1)
 		return (1);
-	if (!block_hash(prev_block, hash_buf) ||
+	if (block_hash(prev_block, hash_buf) == NULL ||
 		memcmp(hash_buf, prev_block->hash, SHA256_DIGEST_LENGTH))
 		return (1);
 	if (memcmp(prev_block->hash, block->info.prev_hash, SHA256_DIGEST_LENGTH))
 		return (1);
-	if (!block_hash(block, hash_buf) ||
+	if (block_hash(block, hash_buf) == NULL ||
 		memcmp(hash_buf, block->hash, SHA256_DIGEST_LENGTH))
 		return (1);
 	if (block->data.len > BLOCKCHAIN_DATA_MAX)
